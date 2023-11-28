@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+}
+.planetWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallPlanetWrapper{
+    display: flex;
+    background-color: lightpink;
+    width: 70%;
+    height: 20rem;
+}
+.smallPlanet{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: blue;
+}
+.smallPlanet:hover{
+    background-color: darkgray;
+}
+.merkurius{
+
+}
+.venus{
+
+}
+.jorden{
+
+}
+.mars{
+
+}
+.jupiter{
+
+}
+.saturnus{
+}
+.uranus{
+
+}
+.neptunus{
+    
+}
