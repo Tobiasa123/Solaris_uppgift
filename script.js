@@ -2,7 +2,7 @@
 //variabler och element 
 let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
 
-
+let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
 
 //få key med post
 async function getKey(){
@@ -11,10 +11,8 @@ async function getKey(){
         headers: {'Content-Type':'application/json'},
     })
     const data = await response.json();
-
     //logga min key
     //console.log(`min key: ${data.key}`);
-
     //returera min key för att använda i getdata
     return(data.key)
 }
@@ -29,7 +27,7 @@ async function getData(){
     //returnera datan för att minska requests
     return data;
 }
-//getplanetinfo hämtar planternas attributer
+//getplanetinfo loggar planternas attributer
 async function getPlanetInfo(){
     const data =  await getData()
     //logga min data
@@ -84,5 +82,20 @@ async function createSmallPlanets(){
 }
 createSmallPlanets()
 
+//skapa den stora planeten 
+async function createLargePlanet(){
+    const data =  await getData()
 
+    data.bodies.forEach(element => {
+
+        if(element.id == 0){
+            let newPlanet = document.createElement('div')
+            newPlanet.classList.add("largePlanet")
+            newPlanet.innerText = element.name
+            largePlanetWrapper.appendChild(newPlanet)
+        }
+
+    }); 
+}
+createLargePlanet()
 

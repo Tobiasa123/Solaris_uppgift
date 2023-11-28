@@ -20,8 +20,12 @@ body{
 .smallPlanetWrapper{
     display: flex;
     background-color: lightpink;
-    width: 70%;
+    margin-left: 10%;
+    margin-right: 5%;
+    width: 100%;
     height: 20rem;
+    justify-content: space-between;
+    align-items: center;
 }
 .smallPlanet{
     width: 5rem;
@@ -54,4 +58,19 @@ body{
 }
 .neptunus{
     
+}
+.largePlanetWrapper{
+    position: absolute;
+    left: -195%;
+    height: 300%;
+    width: 200%;
+}
+.largePlanet{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgb(255, 181, 79);
+    justify-content: center;
+    align-items: center;
 }
