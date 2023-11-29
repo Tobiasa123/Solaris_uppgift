@@ -145,6 +145,7 @@ function showAllPlanets() {
     allSmallPlanets.forEach(planet => {
         planet.classList.remove('hidden');
     });
+    largePlanet.style.backgroundColor = 'yellow';
 }
 
 //skapa global variabel för largeplanet så vi kan ändra färgen till klickade små planterna
