@@ -4,6 +4,20 @@ let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
 
 let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
 
+let planetWrapper = document.querySelector('.planetWrapper')
+
+let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
+
+let infoName =  document.querySelector('.info-h1')
+let infoLatinName =  document.querySelector('.info-h2')
+let infoPara =  document.querySelector('.info-p')
+let infoCircumference =  document.querySelector('#info-circumference')
+let infoDistanceSun =  document.querySelector('#info-distanceSun')
+let infoMaxTemp =  document.querySelector('#info-maxTemp')
+let infoMinTemp =  document.querySelector('#info-minTemp')
+let infoMoon =  document.querySelector('#info-moon')
+
+
 //få key med post
 async function getKey(){
     const response = await fetch('https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/keys', {
@@ -36,6 +50,22 @@ async function getPlanetInfo(){
     });
 }
 getPlanetInfo()
+
+//funktion för att ändra texten, används i createsmallplanets
+function changeInfoText(newName, newLatinName, newParagraph, newCircumference, newDistanceSun, newMaxTemp, newMinTemp, newMoon) {
+    infoName.innerText = newName;
+    infoLatinName.innerText = newLatinName;
+    infoPara.innerText = newParagraph;
+    infoCircumference.innerText =  `OMKRETS  ${newCircumference}`;
+    infoDistanceSun.innerText = `KM FRÅN SOLEN ${newCircumference}`;
+    infoMaxTemp.innerText = `MAX TEMPERATUR ${newMaxTemp}`;
+    infoMinTemp.innerText = `MIN TEMPERATUR ${newMinTemp}`;
+
+    infoMoon.innerText = "MOONS:";
+    newMoon.forEach((moon) => {
+    infoMoon.innerText += `"${moon}" `; 
+});
+}
 
 
 //funtion för att skapa alla små planeterna som man sen stylar i css
@@ -75,12 +105,50 @@ async function createSmallPlanets(){
                     console.log("whoops")
                     break;
             }
-            newPlanet.innerText = element.name
+
+            //lägg till eventlisteners för hide och show
+            //när vi klickar vill vi att all infotext ändras till texten om planeten vi valt
+            newPlanet.addEventListener('click', () => {
+                hideAllPlanets();
+                changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                if(element.name == "Jorden"){
+                    largePlanet.style.backgroundColor = 'darkblue';
+                }
+
+            });
+
+            planetInfoWrapper.addEventListener('click', showAllPlanets);
+
+            //lägg till elementt i wrappern
+            newPlanet.innerText = element.name; // Lägg till 'planetText' här
             smallPlanetWrapper.appendChild(newPlanet)
         }
     });
 }
 createSmallPlanets()
+
+function hideAllPlanets() {
+
+        //console.log(event.target)
+
+        planetInfoWrapper.style.display = "block"
+        let allSmallPlanets = document.querySelectorAll('.smallPlanet');
+
+        allSmallPlanets.forEach(planet => {
+        planet.classList.add('hidden');
+        });
+}
+
+function showAllPlanets() {
+    planetInfoWrapper.style.display = "none"
+    let allSmallPlanets = document.querySelectorAll('.smallPlanet');
+    allSmallPlanets.forEach(planet => {
+        planet.classList.remove('hidden');
+    });
+}
+
+//skapa global variabel för largeplanet så vi kan ändra färgen till klickade små planterna
+let largePlanet;
 
 //skapa den stora planeten 
 async function createLargePlanet(){
@@ -93,9 +161,19 @@ async function createLargePlanet(){
             newPlanet.classList.add("largePlanet")
             newPlanet.innerText = element.name
             largePlanetWrapper.appendChild(newPlanet)
+            largePlanet = newPlanet;
+
+            newPlanet.addEventListener('click', () => {
+                hideAllPlanets();
+                changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                if(element.name == "Solen"){
+                    newPlanet.style.backgroundColor = "yellow"
+                }
+                
+            });
         }
+        
 
     }); 
 }
 createLargePlanet()
-
