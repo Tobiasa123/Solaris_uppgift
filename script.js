@@ -1,22 +1,5 @@
 
 //variabler och element 
-let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
-
-let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
-
-let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
-
-
-let planetWrapper = document.querySelector('.planetWrapper')
-
-//ändrar backgrunds stylingen när man klickat på planeten
-function changeBackgroundStyle(){
-    planetWrapper.style.background = "linear-gradient(90deg, rgb(53, 109, 172) 0%, rgb(4, 4, 86) 100%)"
-}
-function defaultBackgroundStyle(){
-}
-
-
 
 let infoName =  document.querySelector('.info-h1')
 let infoLatinName =  document.querySelector('.info-h2')
@@ -26,6 +9,16 @@ let infoDistanceSun =  document.querySelector('#info-distanceSun')
 let infoMaxTemp =  document.querySelector('#info-maxTemp')
 let infoMinTemp =  document.querySelector('#info-minTemp')
 let infoMoon =  document.querySelector('#info-moon')
+
+let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
+
+let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
+
+let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
+
+
+let planetWrapper = document.querySelector('.planetWrapper')
+
 
 //få key med post
 async function getKey(){
@@ -65,13 +58,13 @@ function changeInfoText(newName, newLatinName, newParagraph, newCircumference, n
     infoName.innerText = newName;
     infoLatinName.innerText = newLatinName;
     infoPara.innerText = newParagraph;
-    infoCircumference.innerHTML =  `OMKRETS <br/>${newCircumference}`;
-    infoDistanceSun.innerHTML = `KM FRÅN SOLEN <br/>${newDistanceSun}`;
-    infoMaxTemp.innerHTML = `MAX TEMPERATUR <br/>${newMaxTemp}`;
-    infoMinTemp.innerHTML = `MIN TEMPERATUR <br/>${newMinTemp}`;
+    infoCircumference.innerHTML =  `OMKRETS <br/> <p class="circumference-p">${newCircumference} km`;
+    infoDistanceSun.innerHTML = `KM FRÅN SOLEN <br/> <p class="distance-p">${newDistanceSun} km`;
+    infoMaxTemp.innerHTML = `MAX TEMPERATUR <br/> <p class="maxTemp-p">${newMaxTemp} C`;
+    infoMinTemp.innerHTML = `MIN TEMPERATUR <br/> <p class="minTemp-p">${newMinTemp} C</p>`;
 
-    infoMoon.innerHTML = `MOONS<br/>`;
-    infoMoon.innerHTML += newMoon.join(", ");
+    infoMoon.innerHTML = `MÅNAR<br/>`;
+    infoMoon.innerHTML += `<p class="moon-p">${newMoon.join(", ")}</p>`;
 }
 
 
@@ -133,7 +126,6 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('jupiterColor')
-                        planetWrapper.style.background = planetWrapperStylingBackground
                     });
                     break;
                 case 6:
@@ -180,6 +172,7 @@ async function createSmallPlanets(){
             //När man klickar på newplanetwrapper förvinner info sidan
             planetInfoWrapper.addEventListener('click', showAllPlanets);
             planetInfoWrapper.addEventListener('click', makeClickable);
+            planetInfoWrapper.addEventListener('click', defaultBackgroundStyle);
         }
     });
 }
@@ -198,6 +191,10 @@ function hideAllPlanets() {
 
         //console.log(event.target)
 
+        //även header elementet gömmer vi här
+        let headingElement = document.querySelector('.headingTitle')
+        headingElement.classList.add('hidden')
+
         planetInfoWrapper.style.display = "flex"
         let allSmallPlanets = document.querySelectorAll('.smallPlanet');
 
@@ -214,6 +211,11 @@ function showAllPlanets() {
     allSmallPlanets.forEach(planet => {
         planet.classList.remove('hidden');
     });
+
+    //heading elementet
+    let headingElement = document.querySelector('.headingTitle')
+    headingElement.classList.remove('hidden')
+
     largePlanet.classList.remove('merkuriusColor','venusColor','jordenColor','marsColor','jupiterColor','saturnusColor','uranusColor','neptunusColor')
     largePlanet.classList.add('sunColor')
 }
@@ -249,3 +251,35 @@ async function createLargePlanet(){
     }); 
 }
 createLargePlanet()
+
+//ändrar backgrunds stylingen när man klickat på planeten
+function changeBackgroundStyle(){
+    planetWrapper.style.background = "linear-gradient(90deg, rgb(0, 40, 87) 0%, rgba(0,0,4,1) 100%)"
+    createRandomDots();
+}
+function defaultBackgroundStyle(){
+    planetWrapper.style.background = "linear-gradient(90deg, rgb(0, 40, 87) 0%, rgba(0,0,4,1) 100%)"
+    clearRandomDots();
+}
+
+function createRandomDots() {
+    for (var i = 0; i < 50; i++) {
+        let dot = document.createElement('div');
+        dot.className = 'dot';
+
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        dot.style.left = x + 'px';
+        dot.style.top = y + 'px';
+
+        dot.classList.add("dot")
+
+        planetWrapper.appendChild(dot);
+    }
+}
+function clearRandomDots() {
+    let dots = document.querySelectorAll('.dot')
+    dots.forEach(element => {
+        element.remove()
+    });
+}
