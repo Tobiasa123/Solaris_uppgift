@@ -2,11 +2,21 @@
 //variabler och element 
 let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
 
+let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
+
 let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
+
 
 let planetWrapper = document.querySelector('.planetWrapper')
 
-let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
+//ändrar backgrunds stylingen när man klickat på planeten
+function changeBackgroundStyle(){
+    planetWrapper.style.background = "linear-gradient(90deg, rgb(53, 109, 172) 0%, rgb(4, 4, 86) 100%)"
+}
+function defaultBackgroundStyle(){
+}
+
+
 
 let infoName =  document.querySelector('.info-h1')
 let infoLatinName =  document.querySelector('.info-h2')
@@ -56,100 +66,134 @@ function changeInfoText(newName, newLatinName, newParagraph, newCircumference, n
     infoLatinName.innerText = newLatinName;
     infoPara.innerText = newParagraph;
     infoCircumference.innerHTML =  `OMKRETS <br/>${newCircumference}`;
-    infoDistanceSun.innerHTML = `KM FRÅN SOLEN <br/>${newCircumference}`;
+    infoDistanceSun.innerHTML = `KM FRÅN SOLEN <br/>${newDistanceSun}`;
     infoMaxTemp.innerHTML = `MAX TEMPERATUR <br/>${newMaxTemp}`;
     infoMinTemp.innerHTML = `MIN TEMPERATUR <br/>${newMinTemp}`;
 
     infoMoon.innerHTML = `MOONS<br/>`;
-    newMoon.forEach((moon) => {
-    infoMoon.innerText += `"${moon}" `; 
-});
+    infoMoon.innerHTML += newMoon.join(", ");
 }
 
 
 //funtion för att skapa alla små planeterna som man sen stylar i css
 async function createSmallPlanets(){
     const data =  await getData()
-    //logga min data
+
+    //jag lägger till eventlisteners och skapar div element direkt i switch,
+    //innan gjorde jag det utanför switch och det funkade men saturnus ringar förstörde det helt
     data.bodies.forEach(element => {
-        let newPlanet = document.createElement('div')
+        
         if(element.id!=0){
-            newPlanet.classList.add("smallPlanet")
             switch (element.id) {
                 case 1:
-                    newPlanet.classList.add("merkurius","merkuriusColor")
+                    let newMerkurius = document.createElement('div')
+                    newMerkurius.classList.add("smallPlanet","merkurius","merkuriusColor")
+                    smallPlanetWrapper.appendChild(newMerkurius)
+                    newMerkurius.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('merkuriusColor')
+                    });
                     break;
                 case 2:
-                    newPlanet.classList.add("venus","venusColor")
+                    let newVenus = document.createElement('div')
+                    newVenus.classList.add("smallPlanet","venus","venusColor")
+                    smallPlanetWrapper.appendChild(newVenus)
+                    newVenus.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('venusColor')
+                    });
                     break;
                 case 3:
-                    newPlanet.classList.add("jorden","jordenColor")
+                    let newJorden = document.createElement('div')
+                    newJorden.classList.add("smallPlanet","jorden","jordenColor")
+                    smallPlanetWrapper.appendChild(newJorden)
+                    newJorden.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('jordenColor')
+                    });
                     break;
                 case 4:
-                    newPlanet.classList.add("mars","marsColor")
+                    let newMars = document.createElement('div')
+                    newMars.classList.add("smallPlanet","mars","marsColor")
+                    smallPlanetWrapper.appendChild(newMars)
+                    newMars.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('marsColor')
+                    });
                     break;
                 case 5:
-                    newPlanet.classList.add("jupiter","jupiterColor")
+                    let newJupiter = document.createElement('div')
+                    newJupiter.classList.add("smallPlanet","jupiter","jupiterColor")
+                    smallPlanetWrapper.appendChild(newJupiter)
+                    newJupiter.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('jupiterColor')
+                        planetWrapper.style.background = planetWrapperStylingBackground
+                    });
                     break;
                 case 6:
-                    newPlanet.classList.add("saturnus","saturnusColor")
+                    //Valde att skapa nytt element inne i varje case istället för utanför, pga fick int saturnus ringar att fungera annars
+                    let newSaturnusWrapper = document.createElement('div');
+                    newSaturnusWrapper.classList.add('saturnusWrapper');
+                    let newSaturnus = document.createElement('div');
+                    newSaturnus.classList.add("smallPlanet", "saturnus","saturnusColor");
                     let newRing = document.createElement("div");
                     newRing.classList.add("saturnusRing");
-                    newPlanet.appendChild(newRing);
+                    newSaturnus.appendChild(newRing);  //Lägg till newRing som ett barn till newSaturnus
+                    newSaturnusWrapper.appendChild(newSaturnus);
+                    smallPlanetWrapper.appendChild(newSaturnusWrapper);
+                    newSaturnus.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('saturnusColor')
+                    });
                     break;
                 case 7:
-                    newPlanet.classList.add("uranus","uranusColor")
+                    let newUranus = document.createElement('div')
+                    newUranus.classList.add("smallPlanet","uranus","uranusColor")
+                    smallPlanetWrapper.appendChild(newUranus)
+                    newUranus.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('uranusColor')
+                    });
                     break;
                 case 8:
-                    newPlanet.classList.add("neptunus","neptunusColor")
+                    let newNeptunus = document.createElement('div')
+                    newNeptunus.classList.add("smallPlanet","neptunus","neptunusColor")
+                    smallPlanetWrapper.appendChild(newNeptunus)
+                    newNeptunus.addEventListener('click', () => {
+                        hideAllPlanets();
+                        changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
+                        largePlanet.classList.add('neptunusColor')
+                    });
                     break;
                 default:
                     console.log("whoops")
                     break;
             }
-
-            //lägg till eventlisteners för hide och show
-            //när vi klickar vill vi att all infotext ändras till texten om planeten vi valt
-            newPlanet.addEventListener('click', () => {
-                hideAllPlanets();
-                changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
-                if(element.name == "Merkurius"){
-                    largePlanet.classList.add('merkuriusColor')
-                } 
-                else if (element.name == "Venus"){
-                    largePlanet.classList.add('venusColor')
-                } 
-                else if (element.name == "Jorden"){
-                    largePlanet.classList.add('jordenColor')
-                } 
-                else if (element.name == "Mars"){
-                    largePlanet.classList.add('marsColor')
-                } 
-                else if (element.name == "Jupiter"){
-                    largePlanet.classList.add('jupiterColor')
-                } 
-                else if (element.name == "Saturnus"){
-                    largePlanet.classList.add('saturnusColor')
-                } 
-                else if (element.name == "Uranus"){
-                    largePlanet.classList.add('uranusColor')
-                } 
-                else if (element.name == "Neptunus"){
-                    largePlanet.classList.add('neptunusColor')
-                } 
-
-            });
-
+            //När man klickar på newplanetwrapper förvinner info sidan
             planetInfoWrapper.addEventListener('click', showAllPlanets);
-
-            //lägg till elementt i wrappern
-            newPlanet.innerText = element.name; // Lägg till 'planetText' här
-            smallPlanetWrapper.appendChild(newPlanet)
+            planetInfoWrapper.addEventListener('click', makeClickable);
         }
     });
 }
 createSmallPlanets()
 
+//funktioner för att göra den stora planten ocklickbar eller klickbar när infosidan visas
+function makeUnclickable(){
+    largePlanet.style.pointerEvents = "none"
+
+}
+function makeClickable(){
+    largePlanet.style.pointerEvents = "auto"
+    
+}
 function hideAllPlanets() {
 
         //console.log(event.target)
@@ -160,6 +204,8 @@ function hideAllPlanets() {
         allSmallPlanets.forEach(planet => {
         planet.classList.add('hidden');
         });
+        makeUnclickable()
+        changeBackgroundStyle()
 }
 
 function showAllPlanets() {
