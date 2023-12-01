@@ -58,13 +58,24 @@ function changeInfoText(newName, newLatinName, newParagraph, newCircumference, n
     infoName.innerText = newName;
     infoLatinName.innerText = newLatinName;
     infoPara.innerText = newParagraph;
-    infoCircumference.innerHTML =  `OMKRETS <br/> <p class="circumference-p">${newCircumference} km`;
-    infoDistanceSun.innerHTML = `KM FRÅN SOLEN <br/> <p class="distance-p">${newDistanceSun} km`;
-    infoMaxTemp.innerHTML = `MAX TEMPERATUR <br/> <p class="maxTemp-p">${newMaxTemp} C`;
-    infoMinTemp.innerHTML = `MIN TEMPERATUR <br/> <p class="minTemp-p">${newMinTemp} C</p>`;
 
-    infoMoon.innerHTML = `MÅNAR<br/>`;
-    infoMoon.innerHTML += `<p class="moon-p">${newMoon.join(", ")}</p>`;
+    //formattera och ta bort decimal med floor
+    //circumference
+    let formattedCircumference = Math.floor(newCircumference).toLocaleString('sv-SE');
+    infoCircumference.innerHTML =  `<h3 class="infoSectionHeader">OMKRETS</h3> <p class="infoSectionPara">${formattedCircumference} km</p>`;
+    //distance to sun
+    let formattedDistanceSun = Math.floor(newDistanceSun).toLocaleString('sv-SE');
+    infoDistanceSun.innerHTML = `<h3 class="infoSectionHeader">KM FRÅN SOLEN</h3> <p class="infoSectionPara">${formattedDistanceSun} km</p>`;
+    //maxtemp
+    let formattedMaxTemp = Math.floor(newMaxTemp).toLocaleString('sv-SE');
+    infoMaxTemp.innerHTML = `<h3 class="infoSectionHeader">MAX TEMPERATUR</h3> <p class="infoSectionPara">${formattedMaxTemp}C</p>`;
+    //mintemp
+    let formattedMinTemp = Math.floor(newMinTemp).toLocaleString('sv-SE');
+    infoMinTemp.innerHTML = `<h3 class="infoSectionHeader">MIN TEMPERATUR </h3> <p class="infoSectionPara">${formattedMinTemp}C</p>`;
+
+    //moons
+    infoMoon.innerHTML = `<h3 class="infoSectionHeader">MÅNAR</h3>`;
+    infoMoon.innerHTML += `<p class="infoSectionPara">${newMoon.join(", ")}</p>`;
 }
 
 
@@ -254,11 +265,11 @@ createLargePlanet()
 
 //ändrar backgrunds stylingen när man klickat på planeten
 function changeBackgroundStyle(){
-    planetWrapper.style.background = "linear-gradient(90deg, rgb(0, 40, 87) 0%, rgba(0,0,4,1) 100%)"
+    planetWrapper.style.background = "linear-gradient(90deg, rgba(12, 22, 77, 1) 0%, rgba(25, 11, 34, 1) 100%)"
     createRandomDots();
 }
 function defaultBackgroundStyle(){
-    planetWrapper.style.background = "linear-gradient(90deg, rgb(0, 40, 87) 0%, rgba(0,0,4,1) 100%)"
+    planetWrapper.style.background = "linear-gradient(90deg, rgba(12, 22, 77, 1) 0%, rgba(25, 11, 34, 1) 100%)"
     clearRandomDots();
 }
 
