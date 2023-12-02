@@ -147,34 +147,36 @@ hr{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: 0.3s;
 }
 .largePlanet:hover{
     background-color: orange;
+    transform: scale(1.01);
 }
 .largePlanet.jordenOzoneLayer::before {
     content: "";
     position: absolute;
-    width: 103%; /* Justera dessa värden för att passa din design */
+    width: 103%; 
     height: 103%;
     border-radius: 50%;
-    background-color: rgba(66, 141, 212, 0.1); /* Justera färg och genomskinlighet för att passa din design */
+    background-color: rgba(66, 141, 212, 0.1); 
     z-index: -1;
 }
 .largePlanet.jordenOzoneLayer::after {
     content: "";
     position: absolute;
-    width: 106%; /* Justera dessa värden för att passa din design */
+    width: 106%; 
     height: 106%;
     border-radius: 50%;
-    background-color: rgba(66, 141, 212, 0.048); /* Justera färg och genomskinlighet för att passa din design */
+    background-color: rgba(66, 141, 212, 0.048); 
     z-index: -2;
 }
 .largePlanet.saturnusRingLayer::before {
     content: "";
     position: absolute;
-    width: 110%; /* Justera dessa värden för att passa din design */
-    height: 11%;
-    border-bottom: 15rem solid rgb(255, 255, 255);
+    width: 110%; 
+    height: 10%;
+    border-bottom: 8rem solid rgb(255, 255, 255);
     transform: perspective(1000px) rotateX(45deg);
     border-radius: 50%;
     /*background-color: rgba(255, 255, 255, 0.4); */
@@ -185,17 +187,18 @@ hr{
     position: absolute;
     width: 110%;
     height: 10%;
-    border: 6rem solid rgb(255, 255, 255);
+    border: 3rem solid rgb(255, 255, 255);
     transform: perspective(1000px) rotateX(45deg);
     border-radius: 50%;
     /*background-color: rgba(255, 255, 255, 0.4); */
     z-index: -1;
 }
+
 .largePlanet.marsLayer::before {
     content: "";
     position: absolute;
     width: 101%;
-    height: 101%;
+    height: 100%;
     border-radius: 50%;
     background-color: rgba(239, 95, 95, 0.107); 
     z-index: -1;
