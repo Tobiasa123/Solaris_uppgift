@@ -82,7 +82,8 @@ hr{
     cursor: pointer;
 }
 .smallPlanet:hover{
-    transform: scale(1.1)
+    transform: scale(1.2);
+    box-shadow: -0.5rem 0px 0rem 0px rgba(0, 0, 0, 0.403) inset;
 }
 .merkurius{
     width: 1rem;
@@ -97,13 +98,22 @@ hr{
     height: 2rem;
 }
 .mars{
-
     width: 1rem;
     height: 1rem;
 }
 .jupiter{
     width: 14rem;
     height: 14rem;
+}
+.jupiter:hover::before{
+    content: "";
+    position: absolute;
+    width: 15%; 
+    height: 8%;
+    border-radius: 50%;
+    background-color: rgba(225, 108, 41, 0.498); 
+    z-index: 1;
+    transform: translateY(10rem) translateX(8rem) rotate(-10deg);
 }
 .saturnusWrapper{
     width: 10rem;
@@ -113,6 +123,9 @@ hr{
     width: 100%;
     height: 100%;
     position: relative;
+}
+.saturnus:hover{
+    transform: scale(1.1) rotate(360deg)
 }
 .saturnusRing{
     width: 15rem;
@@ -197,10 +210,66 @@ hr{
 .largePlanet.marsLayer::before {
     content: "";
     position: absolute;
-    width: 101%;
-    height: 100%;
+    width: 102%;
+    height: 102%;
     border-radius: 50%;
-    background-color: rgba(239, 95, 95, 0.107); 
+    background-color: rgba(239, 95, 95, 0.05); 
+    z-index: -1;
+}
+.largePlanet.jupiterLayer::before {
+    content: "";
+    position: absolute;
+    width: 96%;
+    height: 20%;
+    border-radius: 50%;
+    background-color: rgba(215, 116, 23, 0.407); 
+    justify-self: bottom;
+    z-index: 1;
+    transform: translateY(50%);
+}
+.largePlanet.jupiterLayer::after {
+    content: "";
+    position: absolute;
+    width: 103%; 
+    height: 103%;
+    border-radius: 50%;
+    background-color: rgba(205, 122, 50, 0.046); 
+    z-index: -1;
+}
+.largePlanet.merkuriusLayer::before {
+    content: "";
+    position: absolute;
+    width: 102%; 
+    height: 102%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.046); 
+    z-index: -1;
+}
+.largePlanet.venusLayer::before {
+    content: "";
+    position: absolute;
+    width: 102%; 
+    height: 102%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.046); 
+    z-index: -1;
+}
+.largePlanet.uranusLayer::before {
+    content: "";
+    position: absolute;
+    width: 102%; 
+    height: 102%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.046); 
+    z-index: -1;
+}
+.largePlanet.neptunusLayer::before {
+    content: "";
+    position: absolute;
+    width: 102%; 
+    height: 102%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.046); 
     z-index: -1;
 }
 

@@ -97,6 +97,7 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('merkuriusColor')
+                        largePlanet.classList.add('merkuriusLayer')
                     });
                     break;
                 case 2:
@@ -107,6 +108,7 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('venusColor')
+                        largePlanet.classList.add('venusLayer')
                     });
                     break;
                 case 3:
@@ -139,6 +141,7 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('jupiterColor')
+                        largePlanet.classList.add('jupiterLayer')
                     });
                     break;
                 case 6:
@@ -167,6 +170,7 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('uranusColor')
+                        largePlanet.classList.add('uranusLayer')
                     });
                     break;
                 case 8:
@@ -177,6 +181,7 @@ async function createSmallPlanets(){
                         hideAllPlanets();
                         changeInfoText(element.name, element.latinName, element.desc, element.circumference, element.distance, element.temp.day, element.temp.night, element.moons);
                         largePlanet.classList.add('neptunusColor')
+                        largePlanet.classList.add('neptunusLayer')
                     });
                     break;
                 default:
@@ -190,9 +195,7 @@ async function createSmallPlanets(){
 
             //ta bort ozonlager och ringar
             planetInfoWrapper.addEventListener('click', () => {
-                largePlanet.classList.remove('jordenOzoneLayer');
-                largePlanet.classList.remove('saturnusRingLayer');
-                largePlanet.classList.remove('marsLayer');
+                largePlanet.classList.remove('jordenOzoneLayer','saturnusRingLayer','marsLayer','jupiterLayer','merkuriusLayer','venusLayer','uranusLayer','neptunusLayer');
             });
         }
     });
