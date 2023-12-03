@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Secular+One&family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Roboto+Condensed:wght@100&family=Secular+One&family=VT323&display=swap');
 
-
 *{
     margin: 0;
     padding: 0;
@@ -58,12 +57,6 @@ hr{
     opacity: 0.3;
     filter: blur(2px);
 }
-
-/*Detta är en template för min styling*/
-.planetWrapperStyling{
-    background: linear-gradient(90deg, rgb(53, 109, 172) 0%, rgb(4, 4, 86) 100%);
-}
-
 .smallPlanetWrapper{
     display: flex;
     margin-left: 15%;
@@ -215,14 +208,13 @@ hr{
     border-radius: 50%;
     z-index: -1;
 }
-
 .largePlanet.marsLayer::before {
     content: "";
     position: absolute;
     width: 102%;
     height: 102%;
     border-radius: 50%;
-    background-color: rgba(239, 95, 95, 0.05); 
+    background-color: rgba(239, 95, 95, 0.03); 
     z-index: -1;
 }
 .largePlanet.jupiterLayer::before {
@@ -240,7 +232,7 @@ hr{
     width: 102%; 
     height: 102%;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.046); 
+    background-color: rgba(255, 255, 255, 0.03); 
     z-index: -1;
 }
 .largePlanet.venusLayer::before {
@@ -249,7 +241,7 @@ hr{
     width: 102%; 
     height: 102%;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.046); 
+    background-color: rgba(255, 255, 255, 0.03); 
     z-index: -1;
 }
 .largePlanet.uranusLayer::before {
@@ -258,7 +250,7 @@ hr{
     width: 102%; 
     height: 102%;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.046); 
+    background-color: rgba(255, 255, 255, 0.03); 
     z-index: -1;
 }
 .largePlanet.neptunusLayer::before {
@@ -267,10 +259,9 @@ hr{
     width: 102%; 
     height: 102%;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.046); 
+    background-color: rgba(255, 255, 255, 0.03); 
     z-index: -1;
 }
-
 .hidden {
     display: none;
 }

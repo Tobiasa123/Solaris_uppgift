@@ -27,7 +27,7 @@ async function getKey(){
 async function getData(){
     const response =  await fetch("https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/bodies", {
         method: 'GET',
-        headers: {'x-zocom': await getKey()}
+        headers: {'x-zocom': await getKey()} //getKey funktionen som är vår key i headers
     })
     const data = await response.json()
     //returnera api data
@@ -136,14 +136,14 @@ async function createSmallPlanets(){
                     });
                     break;
                 case 6:
-                    //Valde att skapa nytt element inne i varje case istället för utanför, pga fick int saturnus ringar att fungera annars
+                    //Valde att skapa nytt element inne i varje case istället för utanför switch, pga fick int saturnus ringar att fungera annars
                     let newSaturnusWrapper = document.createElement('div');
                     newSaturnusWrapper.classList.add('saturnusWrapper');
                     let newSaturnus = document.createElement('div');
                     newSaturnus.classList.add("smallPlanet", "saturnus","saturnusColor");
                     let newRing = document.createElement("div");
                     newRing.classList.add("saturnusRing");
-                    newSaturnus.appendChild(newRing);  //Lägg till newRing som ett barn till newSaturnus
+                    newSaturnus.appendChild(newRing);
                     newSaturnusWrapper.appendChild(newSaturnus);
                     smallPlanetWrapper.appendChild(newSaturnusWrapper);
                     newSaturnus.addEventListener('click', () => {
@@ -287,10 +287,12 @@ function createRandomDots() {
         let dot = document.createElement('div');
         dot.className = 'dot';
 
-        //här positionerar man dot på en random plats på skärmnts height och width
+        //här positionerar man dot på en random plats med window height och width
         let x = Math.random() * window.innerWidth;
         let y = Math.random() * window.innerHeight;
+        //horisontell positionering
         dot.style.left = x + 'px';
+        //vertikal positionering
         dot.style.top = y + 'px';
 
         dot.classList.add("dot")
