@@ -1,6 +1,5 @@
 
 //variabler och element 
-
 let infoName =  document.querySelector('.info-h1')
 let infoLatinName =  document.querySelector('.info-h2')
 let infoPara =  document.querySelector('.info-p')
@@ -9,16 +8,10 @@ let infoDistanceSun =  document.querySelector('#info-distanceSun')
 let infoMaxTemp =  document.querySelector('#info-maxTemp')
 let infoMinTemp =  document.querySelector('#info-minTemp')
 let infoMoon =  document.querySelector('#info-moon')
-
 let smallPlanetWrapper = document.querySelector('.smallPlanetWrapper')
-
 let planetInfoWrapper = document.querySelector('.planetInfoWrapper')
-
 let largePlanetWrapper = document.querySelector('.largePlanetWrapper')
-
-
 let planetWrapper = document.querySelector('.planetWrapper')
-
 
 //få key med post
 async function getKey(){
@@ -27,8 +20,6 @@ async function getKey(){
         headers: {'Content-Type':'application/json'},
     })
     const data = await response.json();
-    //logga min key
-    //console.log(`min key: ${data.key}`);
     //returera min key för att använda i getdata
     return(data.key)
 }
@@ -39,10 +30,10 @@ async function getData(){
         headers: {'x-zocom': await getKey()}
     })
     const data = await response.json()
-
-    //returnera datan för att minska requests
+    //returnera api data
     return data;
 }
+
 //getplanetinfo loggar planternas attributer
 async function getPlanetInfo(){
     const data =  await getData()
@@ -79,12 +70,12 @@ function changeInfoText(newName, newLatinName, newParagraph, newCircumference, n
 }
 
 
-//funtion för att skapa alla små planeterna som man sen stylar i css
+//funktion för att skapa alla små planeterna som man sen stylar i css, här lägger jag i bla evenlisteners för elementen
 async function createSmallPlanets(){
     const data =  await getData()
 
-    //jag lägger till eventlisteners och skapar div element direkt i switch,
-    //innan gjorde jag det utanför switch och det funkade men saturnus ringar förstörde det helt
+    //jag lägger till eventlisteners och skapar div element direkt i switch
+    //innan gjorde jag det utanför switch för alla element men ändrade det i senare skede
     data.bodies.forEach(element => {
         
         if(element.id!=0){
@@ -188,12 +179,12 @@ async function createSmallPlanets(){
                     console.log("whoops")
                     break;
             }
-            //När man klickar på newplanetwrapper förvinner info sidan
+            //När man klickar på newplanetwrapper förvinner info sidan och bakgrunden med hjälp av andra funktioner jag skapat
             planetInfoWrapper.addEventListener('click', showAllPlanets);
             planetInfoWrapper.addEventListener('click', makeClickable);
             planetInfoWrapper.addEventListener('click', defaultBackgroundStyle);
 
-            //ta bort ozonlager och ringar
+            //ta bort ozonlager och ringar från largeplanet när man på info skärmen
             planetInfoWrapper.addEventListener('click', () => {
                 largePlanet.classList.remove('jordenOzoneLayer','saturnusRingLayer','marsLayer','jupiterLayer','merkuriusLayer','venusLayer','uranusLayer','neptunusLayer');
             });
@@ -211,9 +202,9 @@ function makeClickable(){
     largePlanet.style.pointerEvents = "auto"
     
 }
-function hideAllPlanets() {
 
-        //console.log(event.target)
+//gömmer planeterna
+function hideAllPlanets() {
 
         //även header elementet gömmer vi här
         let headingElement = document.querySelector('.headingTitle')
@@ -230,6 +221,7 @@ function hideAllPlanets() {
         changeBackgroundStyle()
 }
 
+//visar planterna
 function showAllPlanets() {
     planetInfoWrapper.style.display = "none"
     let allSmallPlanets = document.querySelectorAll('.smallPlanet');
@@ -246,10 +238,10 @@ function showAllPlanets() {
     largePlanet.classList.add('sunColor')
 }
 
-//skapa global variabel för largeplanet så vi kan ändra färgen till klickade små planterna
+//skapa global variabel för largeplanet så vi kan ändra färgen när infosidan visas
 let largePlanet;
 
-//skapa den stora planeten 
+//skapa den stora planeten som man snare ändrar färg och styling på
 async function createLargePlanet(){
     const data =  await getData()
 
@@ -282,16 +274,20 @@ function changeBackgroundStyle(){
     planetWrapper.style.background = "linear-gradient(90deg, rgba(12, 22, 77, 1) 0%, rgba(25, 11, 34, 1) 100%)"
     createRandomDots();
 }
+//ändrar tillbaks till min orginala styling, försökte först med getComputedStyle() men det var lättare såhär när det var såpass lite styling
 function defaultBackgroundStyle(){
     planetWrapper.style.background = "linear-gradient(90deg, rgba(12, 22, 77, 1) 0%, rgba(25, 11, 34, 1) 100%)"
     clearRandomDots();
 }
 
+//funktion för att skapa dots på infosidan
 function createRandomDots() {
+    //här väljer jag hur många dots jag vill ha
     for (var i = 0; i < 50; i++) {
         let dot = document.createElement('div');
         dot.className = 'dot';
 
+        //här positionerar man dot på en random plats på skärmnts height och width
         let x = Math.random() * window.innerWidth;
         let y = Math.random() * window.innerHeight;
         dot.style.left = x + 'px';
@@ -302,6 +298,7 @@ function createRandomDots() {
         planetWrapper.appendChild(dot);
     }
 }
+//här tar jag bort dots från skärmen igen
 function clearRandomDots() {
     let dots = document.querySelectorAll('.dot')
     dots.forEach(element => {
