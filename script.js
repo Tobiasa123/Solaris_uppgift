@@ -15,23 +15,46 @@ let planetWrapper = document.querySelector('.planetWrapper')
 
 //få key med post
 async function getKey(){
-    const response = await fetch('https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/keys', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-    })
-    const data = await response.json();
-    //returera min key för att använda i getdata
-    return(data.key)
+    try {
+        const response = await fetch('https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/keys', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+        })
+        const data = await response.json();
+
+        //om response inte är ok logga något
+        if(!response.ok){
+            console.log("Något gick fel..")
+            return;
+        }
+
+        //returera min key för att använda i getdata
+        return(data.key)
+
+    } catch (error) {
+        console.log(error)
+    }
 }
 //få data med get
 async function getData(){
-    const response =  await fetch("https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/bodies", {
-        method: 'GET',
-        headers: {'x-zocom': await getKey()} //getKey funktionen som är vår key i headers
-    })
-    const data = await response.json()
-    //returnera api data
-    return data;
+    try {
+        const response =  await fetch("https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com/bodies", {
+            method: 'GET',
+            headers: {'x-zocom': await getKey()} //getKey funktionen som är vår key i headers
+        })
+        const data = await response.json()
+
+        //om response inte är ok logga något
+        if(!response.ok){
+            console.log("Något gick fel..")
+            return;
+        }
+        //returnera api data
+        return data;
+
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 //getplanetinfo loggar planternas attributer
