@@ -283,16 +283,16 @@ function defaultBackgroundStyle(){
 //funktion för att skapa dots på infosidan
 function createRandomDots() {
     //här väljer jag hur många dots jag vill ha
-    for (var i = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) {
         let dot = document.createElement('div');
         dot.className = 'dot';
 
         //här positionerar man dot på en random plats med window height och width
         let x = Math.random() * window.innerWidth;
         let y = Math.random() * window.innerHeight;
-        //horisontell positionering
+        //horisontell positionering (startar från vänster)
         dot.style.left = x + 'px';
-        //vertikal positionering
+        //vertikal positionering (startar från top)
         dot.style.top = y + 'px';
 
         dot.classList.add("dot")
